@@ -45,7 +45,7 @@ public class HomeFragment extends Fragment implements MediaAdapter.OnMediaClickL
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        session = new SessionManager(getContext());
+        session = new SessionManager(requireContext());
 
         initViews(view);
         setupRecyclerView();
@@ -72,7 +72,8 @@ public class HomeFragment extends Fragment implements MediaAdapter.OnMediaClickL
                 .enqueue(new Callback<Response<List<Media>>>() {
                     @Override
                     public void onResponse(Call<Response<List<Media>>> call,
-                                           RetrofitResponse<Response<List<Media>>> response) {
+                                           // ✅ CORREGIDO: retrofit2.Response en lugar de RetrofitResponse
+                                           retrofit2.Response<Response<List<Media>>> response) {
                         showLoading(false);
 
                         if (response.isSuccessful() && response.body() != null) {
@@ -84,7 +85,19 @@ public class HomeFragment extends Fragment implements MediaAdapter.OnMediaClickL
                                 adapter.notifyDataSetChanged();
 
                                 showEmptyState(mediaList.isEmpty());
+                            } else {
+                                // ✅ Manejar error de la API
+                                Toast.makeText(getContext(),
+                                        "Error: " + apiResponse.getMessage(),
+                                        Toast.LENGTH_SHORT).show();
+                                showEmptyState(true);
                             }
+                        } else {
+                            // ✅ Manejar error HTTP
+                            Toast.makeText(getContext(),
+                                    "Error del servidor: " + response.code(),
+                                    Toast.LENGTH_SHORT).show();
+                            showEmptyState(true);
                         }
                     }
 
@@ -92,8 +105,9 @@ public class HomeFragment extends Fragment implements MediaAdapter.OnMediaClickL
                     public void onFailure(Call<Response<List<Media>>> call, Throwable t) {
                         showLoading(false);
                         Toast.makeText(getContext(),
-                                "Error: " + t.getMessage(),
+                                "Error de conexión: " + t.getMessage(),
                                 Toast.LENGTH_SHORT).show();
+                        showEmptyState(true);
                     }
                 });
     }
@@ -101,7 +115,8 @@ public class HomeFragment extends Fragment implements MediaAdapter.OnMediaClickL
     @Override
     public void onPlayClick(Media media) {
         Intent intent = new Intent(getActivity(), PlayerActivity.class);
-        intent.putExtra("media", media);
+        //intent.putExtra("media", media);
+        intent.putExtra("media", (CharSequence) media);
         startActivity(intent);
     }
 
@@ -112,16 +127,18 @@ public class HomeFragment extends Fragment implements MediaAdapter.OnMediaClickL
 
     @Override
     public void onMoreClick(Media media) {
-        Toast.makeText(getContext(), "Más opciones", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Más opciones: " + media.getTitle(), Toast.LENGTH_SHORT).show();
     }
 
     private void showLoading(boolean show) {
         progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
         rvMedia.setVisibility(show ? View.GONE : View.VISIBLE);
+        emptyState.setVisibility(View.GONE);
     }
 
     private void showEmptyState(boolean show) {
         emptyState.setVisibility(show ? View.VISIBLE : View.GONE);
         rvMedia.setVisibility(show ? View.GONE : View.VISIBLE);
+        progressBar.setVisibility(View.GONE);
     }
 }

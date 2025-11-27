@@ -7,10 +7,13 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 import com.example.musicstorehn.fragments.HomeFragment;
 import com.example.musicstorehn.fragments.GroupsFragment;
 import com.example.musicstorehn.fragments.MyMusicFragment;
+
 public class ViewPagerAdapter extends FragmentStateAdapter {
+
     public ViewPagerAdapter(@NonNull FragmentActivity fragmentActivity) {
         super(fragmentActivity);
     }
+
     @NonNull
     @Override
     public Fragment createFragment(int position) {
@@ -25,9 +28,9 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
                 return new HomeFragment();
         }
     }
+
     @Override
     public int getItemCount() {
         return 3;
-        6.4 ViewPagerAdapter.java
     }
 }
