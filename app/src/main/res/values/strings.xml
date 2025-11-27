@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Music Store HN</string>
+
+    <!-- Login -->
+    <string name="login_title">Music Store HN</string>
+    <string name="login_subtitle">Comparte tu música con el mundo</string>
+    <string name="email">Email</string>
+    <string name="password">Contraseña</string>
+    <string name="forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="login">Iniciar Sesión</string>
+
+    <!-- Register -->
+    <string name="register">Crear Cuenta</string>
+    <string name="full_name">Nombre completo</string>
+
+    <!-- Navigation -->
+    <string name="nav_home">Inicio</string>
+    <string name="nav_upload">Subir música</string>
+    <string name="nav_groups">Grupos</string>
+    <string name="nav_profile">Perfil</string>
+    <string name="nav_logout">Cerrar sesión</string>
+
+    <!-- Upload media -->
+    <string name="upload_song">Subir Canción</string>
+    <string name="song_title">Título de la canción</string>
+    <string name="select_file">Seleccionar archivo</string>
+
+    <!-- Player -->
+    <string name="song">Canción</string>
+
+    <!-- Groups -->
+    <string name="group_name">Nombre del grupo</string>
+    <string name="create_group">Crear grupo</string>
+</resources>
