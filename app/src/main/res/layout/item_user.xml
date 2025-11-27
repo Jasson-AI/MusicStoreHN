@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- ❌ ERROR: Faltan los primeros caracteres "co" -->
+
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -22,7 +22,6 @@
             android:layout_height="60dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_user_placeholder"
-            app:shapeAppearanceOverlay="@style/CircleImageView"
             android:contentDescription="Foto de perfil"/>
 
         <TextView

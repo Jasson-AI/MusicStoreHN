@@ -6,12 +6,12 @@ plugins {
 
 android {
     namespace = "com.example.musicstorehn"
-    compileSdk = 34  // Corregido - usa una versión más reciente
+    compileSdk = 36  // Corregido - usa una versión más reciente
 
     defaultConfig {
         applicationId = "com.example.musicstorehn"
         minSdk = 24
-        targetSdk = 34  // Actualizado a versión más reciente
+        targetSdk = 36  // Actualizado a versión más reciente
         versionCode = 1
         versionName = "1.0"
 
